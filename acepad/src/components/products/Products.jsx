@@ -1,6 +1,6 @@
 import React from "react";
 import SingleProduct from "./SingleProduct";
-
+import Pagination from "@material-ui/lab/Pagination";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,24 +13,29 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+    top:"80%",
   },
 }));
 
 const Products = (props) => {
   const [products, setProducts] = React.useState([]);
   const classes = useStyles();
+  const page = props.match.params.page ? props.match.params.page : 1;
+  const [total, setTotal] = React.useState(0);
+  const [perPage, setPerPage] = React.useState(10);
   const getData = () => {
     productService
-      .getProducts()
+      .getProducts(page, perPage)
       .then((data) => {
         setProducts(data.products);
+        setTotal(data.total);
       })
       .catch((err) => {
         console.log(err);
       });
   };
   // getData();
-  React.useEffect(getData, []);
+  React.useEffect(getData, [page, perPage]);
   // console.log("Inside Products Component");
   const handleNewProductClick = () => {
     console.log(props);
@@ -39,8 +44,18 @@ const Products = (props) => {
   return (
     <div>
       <h1>Products</h1>
+      Records Per Page:{" "}
+      <select
+        value={perPage}
+        onChange={(e) => setPerPage(e.target.value)}
+        style={{ width: "100px", height: "30px" }}
+      >
+        <option value="2">Two</option>
+        <option value="10">Ten</option>
+      </select>
       {userService.isLoggedIn() && (
         <Fab
+          style={{backgroundColor:"BLack",color:"White"}}
           color="primary"
           aria-label="add"
           className={classes.addBtn}
@@ -49,8 +64,7 @@ const Products = (props) => {
           <AddIcon />
         </Fab>
       )}
-
-      {products.length === 0 ? (
+      {products.length == 0 ? (
         <p>There are no products</p>
       ) : (
         <Grid container spacing={3}>
@@ -59,6 +73,19 @@ const Products = (props) => {
           ))}
         </Grid>
       )}
+      <Grid item xs={12}>
+        <Pagination
+          count={Math.ceil(total / perPage)}
+          variant="outlined"
+          shape="rounded"
+          onChange={(e, value) => {
+            console.log(value);
+            props.history.push("/products/" + value);
+          }}
+        />{" "}
+        Total: {total} Showing {(page - 1) * perPage} to{" "}
+        {(page - 1) * perPage + products.length}
+      </Grid>
     </div>
   );
 };

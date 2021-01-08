@@ -26,33 +26,27 @@ router.get("/:id", async (req, res) => {
   }
 });
 //update a record
-router.put("/:id", validateProduct, async (req, res) => {
+router.post("/:id", validateProduct,auth, admin,  async (req, res) => {
   let product = await Product.findById(req.params.id);
   product.author_name = req.body.author_name;
-  product.email = req.body.email;
-  product.city = req.body.city;
-
-  product.genre = req.body.genre;
-
   product.novel_name = req.body.novel_name;
-
+  product.price = req.body.price;
+  product.genre = req.body.genre;
   await product.save();
   return res.send(product);
 });
-router.delete("/:id",  async (req, res) => {
+//update a record
+router.delete("/:id",auth, admin,  async (req, res) => {
   let product = await Product.findByIdAndDelete(req.params.id);
   return res.send(product);
 });
-
-router.post("/", validateProduct,  async (req, res) => {
+//Insert a record
+router.post("/", validateProduct,auth,  async (req, res) => {
   let product = new Product();
   product.author_name = req.body.author_name;
-  product.email = req.body.email;
-  product.city = req.body.city;
-
-  product.genre = req.body.genre;
-
   product.novel_name = req.body.novel_name;
+  product.price = req.body.price;
+  product.genre = req.body.genre;
   await product.save();
   return res.send(product);
 });

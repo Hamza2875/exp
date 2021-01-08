@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Register = (props) => {
   const classes = useStyles();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("hamza@gmail.com");
+  const [password, setPassword] = React.useState("1");
+  const [name, setName] = React.useState("Hamza");
   return (
     <div className={classes.container}>
       <div className={classes.child}>

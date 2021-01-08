@@ -36,3 +36,59 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+h2 { 
+  color: White;
+ position: absolute; 
+ top: 300px; 
+ right: 500px;
+ font-size: 50px;
+}
+h3 { 
+  color: White;
+ position: absolute; 
+ top: 400px; 
+ right: 550px;
+ font-size: 17px;
+}
+
+.search { 
+ position: absolute; 
+ top:470px;
+ right: 700px;
+ 
+ color: white;
+}
+
+.btn {
+
+  right: 200px;
+  height:20ch;
+  padding: 10px 190px;
+  
+
+}
+.hover1 {
+  position: absolute; 
+ top: 600px; 
+ right: 950px;
+ font-size: 17px;
+ color :black;
+ background:white; 
+}
+.hover2 {
+  position: absolute; 
+ top: 600px; 
+ right: 600px;
+ font-size: 17px;
+ color :black;
+ background:white;
+
+}
+
+.car{
+  padding: 10px;
+}

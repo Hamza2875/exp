@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 const TopMenu = () => {
   const classes = useStyles();
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="bar" style= {{backgroundColor:"black"}}>
       <Toolbar>
         <Typography variant="h6">
           <Link to="/" className={classes.link}>
@@ -23,12 +23,12 @@ const TopMenu = () => {
         </Typography>
         <Typography variant="h6">
           <Link to="/products" className={classes.link}>
-            Products
+            Novels
           </Link>
         </Typography>
         <Typography variant="h6">
-          <Link to="/products/new" className={classes.link}>
-            New Product
+          <Link to="/genres" className={classes.link}>
+            Genres
           </Link>
         </Typography>
         <Typography variant="h6">
@@ -52,7 +52,7 @@ const TopMenu = () => {
         ) : (
           <Button
             variant="contained"
-            color="primary"
+            color="black"
             onClick={(e) => {
               userService.logout();
               window.location.reload();
